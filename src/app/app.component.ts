@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'dsa-visualizer';
+  menuItems: any[] = [
+    {
+      label: 'Sorting Algorithm',
+      description:
+        'A Sorting Algorithm is used to rearrange a given array or list elements according ' +
+        'to a comparison operator on the elements. The comparison operator is used to decide ' +
+        'the new order of element in the respective data structure.',
+      icon: 'dashboard',
+      link: 'sorting'
+    },
+    { label: 'Pathfinder Algorithm', icon: 'dashboard', link: 'pathfinder' },
+  ];
 }

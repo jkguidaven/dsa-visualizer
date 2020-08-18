@@ -1,1 +1,63 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// import font styling
+@import 'fonts.scss';
+
+// import color styling
+@import 'colors.scss';
+
+$quicksand-typography: mat-typography-config(
+  $font-family: 'Quicksand, sans-serif',
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core($quicksand-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ui-primary: mat-palette($primary, 900);
+$ui-accent: mat-palette($accent, 600);
+$ui-backgroud: #464646;
+
+// The warn palette is optional (defaults to red).
+$ui-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ui-theme: mat-dark-theme($ui-primary, $ui-accent, $ui-warn);
+
+// Insert custom background color
+$background: map-get($ui-theme, background);
+$background: map_merge(
+  $background,
+  (
+    background: $ui-backgroud,
+  )
+);
+$ui-theme: map_merge(
+  $ui-theme,
+  (
+    background: $background,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ui-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+}

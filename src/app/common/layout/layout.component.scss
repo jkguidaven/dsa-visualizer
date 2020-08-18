@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+$accent: map-get($ui-theme, accent);
+$primary: map-get($ui-theme, primary);
+
+.mat-sidenav-container::ng-deep {
+  height: 100%;
+  background-color: transparent;
+
+  .mat-sidenav {
+    background-color: mat-color($primary);
+    max-width: 250px;
+    border: none;
+  }
+
+  .mat-sidenav-content {
+    margin-left: 230px !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mat-sidenav-container.full-width::ng-deep {
+  .mat-sidenav-content {
+    margin-left: 64px !important;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

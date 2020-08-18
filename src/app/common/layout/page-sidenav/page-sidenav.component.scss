@@ -1,0 +1,106 @@
+@import 'src/styles.scss';
+
+$accent: map-get($ui-theme, accent);
+$primary: map-get($ui-theme, primary);
+
+.mat-list::ng-deep {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  height: 100%;
+
+  .mat-subheader {
+    color: mat-color($primary, 500);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 200 !important;
+    padding: 24px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    width: 100%;
+    height: 250px;
+
+    .brand-logo {
+      margin: 0 auto 15px;
+    }
+
+    .user-image {
+      background-color: mat-color($primary, 800);
+      text-align: center;
+      min-width: 80px;
+      min-height: 80px;
+      border-radius: 50%;
+      margin: 20px 0;
+
+      .mat-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 80px;
+      }
+    }
+  }
+
+  .menu-container {
+    margin-top: 10px;
+
+    .mat-list-item-content {
+      padding: 0;
+
+      button {
+        color: mat-color($primary, 600);
+        padding: 10px 24px;
+        font-size: 16px;
+        font-weight: 300 !important;
+        margin: 10px 0;
+        width: 100%;
+        text-align: left;
+
+        .mat-icon {
+          margin-right: 10px;
+        }
+      }
+
+      button.mat-accent {
+        color: mat-color($accent);
+      }
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .side-nav-control {
+    color: mat-color($primary, 600);
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 300 !important;
+
+    .version-info {
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    button {
+      float: right;
+      .mat-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.mat-list.collapse::ng-deep {
+  .brand-logo {
+    margin: 24px auto;
+  }
+
+  .menu-container button {
+    padding: 5px;
+    text-align: center;
+
+    .mat-icon {
+      margin: 0;
+    }
+  }
+}

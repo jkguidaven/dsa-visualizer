@@ -1,0 +1,19 @@
+<mat-sidenav-container [ngClass]="{ 'full-width': collapseSidenav }">
+  <mat-sidenav mode="side" opened>
+    <app-page-sidenav [menuItems]="menuItems" [(collapse)]="collapseSidenav">
+    </app-page-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-page-header>
+        <span title>{{ pageTitle }}</span>
+        <span *ngIf="pageDescription" description>{{ pageDescription }}</span>
+    </app-page-header>
+
+    <mat-divider color="primary"></mat-divider>
+
+    <div class="content-container">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
