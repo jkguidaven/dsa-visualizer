@@ -1,0 +1,9 @@
+<svg>
+  <rect *ngFor="let item of model.array; let i = index"
+    attr.width="{{ 100 / model.array.length }}%"
+    attr.height="{{ (item.value / model.size)  * 100 }}%"
+    attr.fill="{{ item.color }}"
+    attr.x="{{ (100 / model.array.length) * i }}%"
+    attr.y="{{ 100 - ((item.value / model.size)  * 100) }}%"
+  />
+</svg>

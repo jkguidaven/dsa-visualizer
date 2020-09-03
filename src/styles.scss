@@ -29,7 +29,7 @@ $ui-backgroud: #464646;
 $ui-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$ui-theme: mat-dark-theme($ui-primary, $ui-accent, $ui-warn);
+$ui-theme: mat-light-theme($ui-primary, $ui-accent, $ui-warn);
 
 // Insert custom background color
 $background: map-get($ui-theme, background);

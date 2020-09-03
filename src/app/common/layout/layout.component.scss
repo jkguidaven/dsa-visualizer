@@ -19,6 +19,11 @@ $primary: map-get($ui-theme, primary);
     display: flex;
     flex-direction: column;
   }
+
+  .content-container {
+    flex-grow: 1;
+    padding: 10px 20px;
+  }
 }
 
 .mat-sidenav-container.full-width::ng-deep {

@@ -21,6 +21,7 @@ import { PageHeaderComponent } from './common/layout/page-header/page-header.com
 import { PageSidenavComponent } from './common/layout/page-sidenav/page-sidenav.component';
 import { SortingViewComponent } from './views/sorting-view/sorting-view.component';
 import { PathfinderViewComponent } from './views/pathfinder-view/pathfinder-view.component';
+import { ArrayDisplayComponent } from './common/components/array-display/array-display.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PathfinderViewComponent } from './views/pathfinder-view/pathfinder-view
     PageHeaderComponent,
     PageSidenavComponent,
     SortingViewComponent,
-    PathfinderViewComponent
+    PathfinderViewComponent,
+    ArrayDisplayComponent
   ],
   imports: [
     BrowserModule,
