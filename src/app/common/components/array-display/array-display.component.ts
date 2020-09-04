@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArrayObjectModel } from './array.model';
+import { ArrayObjectModel } from '../../classes/models/array.model';
 
 @Component({
   selector: 'app-array-display',
@@ -7,14 +7,7 @@ import { ArrayObjectModel } from './array.model';
   styleUrls: ['./array-display.component.scss']
 })
 export class ArrayDisplayComponent implements OnInit {
-  @Input() model: ArrayObjectModel = {
-    array: [
-      { value: 3, color: 'red' },
-      { value: 1, color: 'yellow' },
-      { value: 2, color: 'blue' }
-    ],
-    size: 3
-  };
+  @Input() model: ArrayObjectModel = null;
 
   constructor() { }
 
