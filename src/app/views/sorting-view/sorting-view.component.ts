@@ -10,7 +10,7 @@ import { SortRunner } from 'src/app/common/classes/strategies/sort-runner';
   styleUrls: ['./sorting-view.component.scss']
 })
 export class SortingViewComponent implements OnInit {
-  private strategy: SortStrategy = SortStrategyFactory.create(SortStrategies.SELECTION_SORT);
+  private strategy: SortStrategy = SortStrategyFactory.create(SortStrategies.INSERTION_SORT);
   public runner: SortRunner;
   private model: ArrayObjectModel = { array: [] };
   private size = 100;

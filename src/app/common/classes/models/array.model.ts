@@ -13,4 +13,5 @@ export enum ArrayModelColorIndicators {
   traverse = 'grey',
   sorted = 'green',
   compared = 'blue',
+  temporarysorted = 'violet'
 }
