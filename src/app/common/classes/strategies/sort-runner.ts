@@ -2,8 +2,8 @@ import { SortStrategy } from './sort-strategy';
 import { ArrayObjectModel } from '../models/array.model';
 
 export class SortRunner {
-  private speed: number = 1;
-  private running: Boolean = false;
+  private speed = 1;
+  private running = false;
   private iterator: any;
 
   constructor(private strategy: SortStrategy, private model: ArrayObjectModel) {

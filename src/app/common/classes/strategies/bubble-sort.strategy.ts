@@ -8,8 +8,8 @@ export class BubbleSortStrategy implements SortStrategy {
     let currentSorted = model.array.length - 1;
     do {
       swapped = false;
-      for(let i = 1;i <= currentSorted; i++) {
-        const currTraversedColor =model.array[i - 1].color;
+      for (let i = 1; i <= currentSorted; i++) {
+        const currTraversedColor = model.array[i - 1].color;
         const currComparedColor = model.array[i].color;
         yield model;
 

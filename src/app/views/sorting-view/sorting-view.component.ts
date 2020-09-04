@@ -10,10 +10,10 @@ import { SortRunner } from 'src/app/common/classes/strategies/sort-runner';
   styleUrls: ['./sorting-view.component.scss']
 })
 export class SortingViewComponent implements OnInit {
-  private strategy: SortStrategy = SortStrategyFactory.create(SortStrategies.BUBBLE_SORT);
+  private strategy: SortStrategy = SortStrategyFactory.create(SortStrategies.SELECTION_SORT);
   public runner: SortRunner;
   private model: ArrayObjectModel = { array: [] };
-  private size: Number = 100;
+  private size = 100;
 
   constructor() { }
 
@@ -30,7 +30,7 @@ export class SortingViewComponent implements OnInit {
   }
 
   populateModel() {
-    for (let i = 1;i <= this.size;i++) {
+    for (let i = 1; i <= this.size; i++) {
       this.model.array.push({
         value: i,
         color: ArrayModelColorIndicators.unsorted
@@ -39,7 +39,9 @@ export class SortingViewComponent implements OnInit {
   }
 
   shuffleModel() {
-    let m = this.model.array.length, t, i;
+    let m = this.model.array.length;
+    let t;
+    let i;
 
     while (m) {
       i = Math.floor(Math.random() * m--);
