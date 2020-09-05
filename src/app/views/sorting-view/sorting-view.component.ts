@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArrayObjectModel, ArrayModelColorIndicators } from 'src/app/common/classes/models/array.model';
 import { SortStrategyFactory, SortStrategies } from 'src/app/common/classes/strategies/sort-strategy.factory';
-import { SortStrategy } from 'src/app/common/classes/strategies/sort-strategy';
 import { SortRunner } from 'src/app/common/classes/strategies/sort-runner';
 
 @Component({
@@ -10,21 +9,27 @@ import { SortRunner } from 'src/app/common/classes/strategies/sort-runner';
   styleUrls: ['./sorting-view.component.scss']
 })
 export class SortingViewComponent implements OnInit {
-  private strategy: SortStrategy = SortStrategyFactory.create(SortStrategies.INSERTION_SORT);
-  public runner: SortRunner;
+  public currentAlgorithm: string;
   private model: ArrayObjectModel = { array: [] };
   private size = 100;
+
+  public runner: SortRunner;
 
   constructor() { }
 
   ngOnInit() {
+    this.currentAlgorithm = this.getSupportedAlgorithms()[0];
     this.initModel();
     this.initRunner();
-    this.runner.run();
+  }
+
+  generateModel() {
+    this.initModel();
+    this.initRunner();
   }
 
   initModel() {
-    this.model.array.slice(0, this.model.array.length);
+    this.model.array.length = 0;
     this.populateModel();
     this.shuffleModel();
   }
@@ -52,6 +57,41 @@ export class SortingViewComponent implements OnInit {
   }
 
   initRunner() {
-    this.runner = new SortRunner(this.strategy, this.model);
+    this.runner = new SortRunner(null, this.model);
+    this.setAlgorithm(this.currentAlgorithm);
+  }
+
+  getSupportedAlgorithms(): any[] {
+    return Object.keys(SortStrategies);
+  }
+
+  setAlgorithm(algorithm: string) {
+    this.runner.setStrategy(SortStrategyFactory.create(SortStrategies[algorithm]));
+  }
+
+  play() {
+    if (this.runner.hasStarted()) {
+      this.runner.isRunning()
+        ? this.runner.pause()
+        : this.runner.resume();
+    } else {
+      this.runner.run();
+    }
+  }
+
+  stop() {
+    this.runner.stop();
+  }
+
+  next() {
+    this.runner.next();
+  }
+
+  previous() {
+    this.runner.previous();
+  }
+
+  canNavigate() {
+    return !this.runner.isRunning() && this.runner.hasStarted();
   }
 }

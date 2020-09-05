@@ -4,9 +4,9 @@ import { SelectionSortStrategy } from './selection-sort.strategy';
 import { InsertionSortStrategy } from './insertion-sort.strategy';
 
 export enum SortStrategies {
-  BUBBLE_SORT,
-  SELECTION_SORT,
-  INSERTION_SORT
+  BUBBLE_SORT = 'Bubble sort',
+  SELECTION_SORT = 'Selection sort',
+  INSERTION_SORT = 'Insertion sort'
 }
 
 export class SortStrategyFactory {

@@ -13,7 +13,8 @@ import {
   MatToolbarModule,
   MatDividerModule,
   MatListModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSelectModule
 } from '@angular/material';
 
 
@@ -22,6 +23,7 @@ import { PageSidenavComponent } from './common/layout/page-sidenav/page-sidenav.
 import { SortingViewComponent } from './views/sorting-view/sorting-view.component';
 import { PathfinderViewComponent } from './views/pathfinder-view/pathfinder-view.component';
 import { ArrayDisplayComponent } from './common/components/array-display/array-display.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ArrayDisplayComponent } from './common/components/array-display/array-d
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
@@ -42,7 +45,8 @@ import { ArrayDisplayComponent } from './common/components/array-display/array-d
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

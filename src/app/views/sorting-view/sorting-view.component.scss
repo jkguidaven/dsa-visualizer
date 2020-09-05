@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .mat-toolbar {
+    > * {
+      margin: 0 10px;
+    }
+
+    .algorithm-select-container {
+      width: 200px;
+    }
+  }
+
+  .array-display {
+    padding: 10px;
+    flex-grow: 1;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+

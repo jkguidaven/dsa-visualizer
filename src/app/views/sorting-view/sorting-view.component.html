@@ -1,2 +1,59 @@
-<app-array-display [model]="model">
-</app-array-display>
+<div class="container">
+  <mat-toolbar>
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="generateModel()"
+      [disabled]="runner.isRunning()"
+    >
+      Generate array
+    </button>
+
+    <span class="spacer"></span>
+
+    <div class="algorithm-select-container">
+      <mat-select
+        [(value)]="currentAlgorithm"
+        [disabled]="runner.isRunning()"
+        name="algorithm-selection"
+      >
+        <mat-option
+          *ngFor="let algorithm of getSupportedAlgorithms()"
+          [value]="algorithm"
+          (click)="setAlgorithm(algorithm)"
+        >
+          {{ algorithm }}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div>
+      <button mat-icon-button (click)="previous()"  [disabled]="!canNavigate()">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="play()">
+        <mat-icon>
+          {{ runner.isRunning() ? 'pause' : 'play_arrow' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="stop()" [disabled]="!runner.hasStarted()">
+        <mat-icon>
+          stop
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="next()" [disabled]="!canNavigate()">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <app-array-display class="array-display" [model]="model">
+  </app-array-display>
+</div>

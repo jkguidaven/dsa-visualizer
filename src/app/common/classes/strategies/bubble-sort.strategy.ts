@@ -11,12 +11,10 @@ export class BubbleSortStrategy implements SortStrategy {
       for (let i = 1; i <= currentSorted; i++) {
         const currTraversedColor = model.array[i - 1].color;
         const currComparedColor = model.array[i].color;
-        yield model;
 
         model.array[i - 1].color = ArrayModelColorIndicators.traverse;
-
-
         model.array[i].color = ArrayModelColorIndicators.compared;
+
         yield model;
 
         if (model.array[i - 1].value > model.array[i].value) {
