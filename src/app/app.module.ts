@@ -14,7 +14,8 @@ import {
   MatDividerModule,
   MatListModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSliderModule
 } from '@angular/material';
 
 
@@ -46,7 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatListModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

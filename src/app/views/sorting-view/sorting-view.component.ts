@@ -57,7 +57,7 @@ export class SortingViewComponent implements OnInit {
   }
 
   initRunner() {
-    this.runner = new SortRunner(null, this.model);
+    this.runner = new SortRunner(this.model);
     this.setAlgorithm(this.currentAlgorithm);
   }
 

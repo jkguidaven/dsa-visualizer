@@ -1,12 +1,23 @@
 <div class="container">
   <mat-toolbar>
+    <mat-slider
+      [disabled]="runner.isRunning()"
+      min="5"
+      max="100"
+      [step]="1"
+      [(ngModel)]="size"
+      (change)="generateModel()"
+      thumbLabel
+    >
+    </mat-slider>
+
     <button
       mat-flat-button
       color="accent"
       (click)="generateModel()"
       [disabled]="runner.isRunning()"
     >
-      Generate array
+      Randomize
     </button>
 
     <span class="spacer"></span>
