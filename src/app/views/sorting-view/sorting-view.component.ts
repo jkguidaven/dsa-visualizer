@@ -91,7 +91,7 @@ export class SortingViewComponent implements OnInit {
     this.runner.previous();
   }
 
-  canNavigate() {
+  canNavigateBack() {
     return !this.runner.isRunning() && this.runner.hasStarted();
   }
 }

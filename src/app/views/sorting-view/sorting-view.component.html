@@ -39,7 +39,7 @@
     </div>
 
     <div>
-      <button mat-icon-button (click)="previous()"  [disabled]="!canNavigate()">
+      <button mat-icon-button (click)="previous()"  [disabled]="!canNavigateBack()">
         <mat-icon>
           navigate_before
         </mat-icon>
@@ -57,7 +57,7 @@
         </mat-icon>
       </button>
 
-      <button mat-icon-button (click)="next()" [disabled]="!canNavigate()">
+      <button mat-icon-button (click)="next()" [disabled]="runner.isRunning()">
         <mat-icon>
           navigate_next
         </mat-icon>

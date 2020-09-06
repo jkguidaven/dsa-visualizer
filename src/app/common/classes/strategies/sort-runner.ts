@@ -11,7 +11,7 @@ export class SortRunner {
   private iterator: any;
 
   constructor(private model: ArrayObjectModel) {
-    this.speed = 2500 / model.array.length;
+    this.speed = 1000 / model.array.length;
   }
 
   setStrategy(strategy: SortStrategy) {
@@ -20,15 +20,23 @@ export class SortRunner {
   }
 
   run() {
-    this.resetStateStack();
-    this.pushStateToStack(this.model);
+    this.init();
     this.running = true;
-    this.iterator = this.strategy.iterator(this.model);
-    this.started = true;
     this.next();
   }
 
+  init() {
+    this.iterator = this.strategy.iterator(this.model);
+    this.resetStateStack();
+    this.pushStateToStack(this.model);
+    this.started = true;
+  }
+
   next() {
+    if (!this.hasStarted()){
+      this.init();
+    }
+
     setTimeout(() => {
       if (this.statePointer < this.stateStack.length - 1) {
         const record = this.stateStack[++this.statePointer];
@@ -68,8 +76,10 @@ export class SortRunner {
   }
 
   resume() {
-    this.running = true;
-    this.next();
+    if (this.hasStarted()) {
+      this.running = true;
+      this.next();
+    }
   }
 
   isRunning() {
