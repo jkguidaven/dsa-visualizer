@@ -3,10 +3,10 @@ import { ArrayObjectModel, ArrayModelColorIndicators } from '../models/array.mod
 
 export class SortRunner {
   private stateStack: ArrayObjectModel[];
-  private statePointer: number = -1;
-  private speed: number = 1;
-  private running: boolean = false;
-  private started: boolean = false;
+  private statePointer = -1;
+  private speed = 1;
+  private running = false;
+  private started = false;
   private strategy: SortStrategy;
   private iterator: any;
 
@@ -33,7 +33,7 @@ export class SortRunner {
   }
 
   next() {
-    if (!this.hasStarted()){
+    if (!this.hasStarted()) {
       this.init();
     }
 
