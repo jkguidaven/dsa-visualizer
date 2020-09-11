@@ -3,12 +3,14 @@ import { BubbleSortStrategy } from './bubble-sort.strategy';
 import { SelectionSortStrategy } from './selection-sort.strategy';
 import { InsertionSortStrategy } from './insertion-sort.strategy';
 import { MergeSortStrategy } from './merge-sort.strategy';
+import { QuickSortStrategy } from './quick-sort.strategy';
 
 export enum SortStrategies {
   BUBBLE_SORT = 'Bubble sort',
   SELECTION_SORT = 'Selection sort',
   INSERTION_SORT = 'Insertion sort',
   MERGE_SORT = 'Merge sort',
+  QUICK_SORT = 'Quick sort'
 }
 
 export class SortStrategyFactory {
@@ -22,6 +24,8 @@ export class SortStrategyFactory {
         return new InsertionSortStrategy();
       case SortStrategies.MERGE_SORT:
         return new MergeSortStrategy();
+      case SortStrategies.QUICK_SORT:
+        return new QuickSortStrategy();
       default:
         return null;
     }
