@@ -1,5 +1,5 @@
 import { SortStrategy } from './sort-strategy';
-import { ArrayObjectModel, ArrayModelColorIndicators } from '../models/array.model';
+import { ArrayObjectModel, ArrayModelColorIndicators } from '../../models/array.model';
 
 export class SortRunner {
   private stateStack: ArrayObjectModel[];

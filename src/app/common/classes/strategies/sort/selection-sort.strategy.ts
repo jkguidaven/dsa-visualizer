@@ -1,4 +1,4 @@
-import { ArrayObjectModel, ArrayModelColorIndicators } from '../models/array.model';
+import { ArrayObjectModel, ArrayModelColorIndicators } from '../../models/array.model';
 import { SortStrategy } from './sort-strategy';
 
 export class SelectionSortStrategy implements SortStrategy {

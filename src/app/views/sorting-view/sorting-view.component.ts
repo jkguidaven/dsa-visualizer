@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArrayObjectModel, ArrayModelColorIndicators } from 'src/app/common/classes/models/array.model';
-import { SortStrategyFactory, SortStrategies } from 'src/app/common/classes/strategies/sort-strategy.factory';
-import { SortRunner } from 'src/app/common/classes/strategies/sort-runner';
+import { SortStrategyFactory, SortStrategies } from 'src/app/common/classes/strategies/sort/sort-strategy.factory';
+import { SortRunner } from 'src/app/common/classes/strategies/sort/sort-runner';
 
 @Component({
   selector: 'app-sorting-view',
