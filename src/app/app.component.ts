@@ -16,6 +16,12 @@ export class AppComponent {
       icon: 'dashboard',
       link: 'sorting'
     },
-    { label: 'Pathfinder Algorithm', icon: 'dashboard', link: 'pathfinder' },
+    {
+      label: 'Pathfinder Algorithm',
+      icon: 'dashboard',
+      link: 'pathfinder',
+      description:
+        'Pathfinding algorithms are usually an attempt to solve the shortest path problem in graph theory.',
+    },
   ];
 }

@@ -1,1 +1,14 @@
-<p>pathfinder-view works!</p>
+<div class="container">
+  <mat-toolbar>
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="randomizePosition()"
+    >
+      Randomize
+    </button>
+  </mat-toolbar>
+
+  <app-graph-display class="graph-display" [model]="model">
+  </app-graph-display>
+</div>

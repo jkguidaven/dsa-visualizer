@@ -25,6 +25,7 @@ import { SortingViewComponent } from './views/sorting-view/sorting-view.componen
 import { PathfinderViewComponent } from './views/pathfinder-view/pathfinder-view.component';
 import { ArrayDisplayComponent } from './common/components/array-display/array-display.component';
 import { FormsModule } from '@angular/forms';
+import { GraphDisplayComponent } from './common/components/graph-display/graph-display.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FormsModule } from '@angular/forms';
     PageSidenavComponent,
     SortingViewComponent,
     PathfinderViewComponent,
-    ArrayDisplayComponent
+    ArrayDisplayComponent,
+    GraphDisplayComponent
   ],
   imports: [
     BrowserModule,
