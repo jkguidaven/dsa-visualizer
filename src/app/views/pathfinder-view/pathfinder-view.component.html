@@ -4,9 +4,54 @@
       mat-flat-button
       color="accent"
       (click)="randomizePosition()"
+      [disabled]="runner.isRunning()"
     >
       Randomize
     </button>
+
+    <span class="spacer"></span>
+
+    <div class="algorithm-select-container">
+      <mat-select
+        [(value)]="currentAlgorithm"
+        [disabled]="runner.isRunning()"
+        name="algorithm-selection"
+      >
+        <mat-option
+          *ngFor="let algorithm of getSupportedAlgorithms()"
+          [value]="algorithm"
+          (click)="setAlgorithm(algorithm)"
+        >
+          {{ algorithm }}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div>
+      <button mat-icon-button (click)="previous()"  [disabled]="!canNavigateBack()">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="play()">
+        <mat-icon>
+          {{ runner.isRunning() ? 'pause' : 'play_arrow' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="stop()" [disabled]="!runner.hasStarted()">
+        <mat-icon>
+          stop
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="next()" [disabled]="runner.isRunning()">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 
   <app-graph-display class="graph-display" [model]="model">

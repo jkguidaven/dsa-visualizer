@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphObjectModel } from 'src/app/common/classes/models/graph.model';
+import { PathFinderRunner } from 'src/app/common/classes/strategies/pathfinder/pathfinder-runner';
+import {
+  PathFinderStrategies,
+  PathFinderStrategyFactory
+} from 'src/app/common/classes/strategies/pathfinder/pathfinder-strategy.factory';
 
 @Component({
   selector: 'app-pathfinder-view',
@@ -7,13 +12,22 @@ import { GraphObjectModel } from 'src/app/common/classes/models/graph.model';
   styleUrls: ['./pathfinder-view.component.scss']
 })
 export class PathfinderViewComponent implements OnInit {
+  public currentAlgorithm: string;
+  public model: GraphObjectModel;
+  public runner: PathFinderRunner;
+
   width = 30;
   height = 20;
-  model: GraphObjectModel;
 
   constructor() { }
 
   ngOnInit() {
+    this.currentAlgorithm = this.getSupportedAlgorithms()[0];
+    this.initModel();
+    this.initRunner();
+  }
+
+  initModel() {
     this.model = new GraphObjectModel(this.width, this.height);
     const matrix = this.model.getNodeMatrix();
 
@@ -33,5 +47,45 @@ export class PathfinderViewComponent implements OnInit {
     x = Math.floor(Math.random() * this.model.getWidth());
     y = Math.floor(Math.random() * this.model.getHeight());
     this.model.setEndingNode(matrix[y][x]);
+  }
+
+
+  initRunner() {
+    this.runner = new PathFinderRunner(this.model);
+    this.setAlgorithm(this.currentAlgorithm);
+  }
+
+  getSupportedAlgorithms(): any[] {
+    return Object.keys(PathFinderStrategies);
+  }
+
+  setAlgorithm(algorithm: string) {
+    this.runner.setStrategy(PathFinderStrategyFactory.create(PathFinderStrategies[algorithm]));
+  }
+
+  play() {
+    if (this.runner.hasStarted()) {
+      this.runner.isRunning()
+        ? this.runner.pause()
+        : this.runner.resume();
+    } else {
+      this.runner.run();
+    }
+  }
+
+  stop() {
+    this.runner.stop();
+  }
+
+  next() {
+    this.runner.next();
+  }
+
+  previous() {
+    this.runner.previous();
+  }
+
+  canNavigateBack() {
+    return !this.runner.isRunning() && this.runner.hasStarted();
   }
 }

@@ -4,6 +4,7 @@ export enum GraphModelColorIndicators {
   visited = 'grey',
   starting = 'blue',
   ending = 'red',
+  routed = 'green'
 }
 
 export interface GraphNode {
@@ -11,6 +12,7 @@ export interface GraphNode {
   value: number;
   color: GraphModelColorIndicators;
   neighbors: GraphNode[];
+  parentNode?: GraphNode;
 }
 
 export class GraphObjectModel {
@@ -57,6 +59,10 @@ export class GraphObjectModel {
 
   getNodeMatrix(): GraphNode[][] {
     return this.nodeMatrix;
+  }
+
+  setNodeMatrix(nodeMatrix: GraphNode[][]): void {
+    this.nodeMatrix = nodeMatrix;
   }
 
   getWidth(): number {
