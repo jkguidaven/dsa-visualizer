@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphObjectModel } from 'src/app/common/classes/models/graph.model';
+import { GraphObjectModel, GraphModelColorIndicators } from 'src/app/common/classes/models/graph.model';
 import { PathFinderRunner } from 'src/app/common/classes/strategies/pathfinder/pathfinder-runner';
 import {
   PathFinderStrategies,
@@ -47,8 +47,11 @@ export class PathfinderViewComponent implements OnInit {
     x = Math.floor(Math.random() * this.model.getWidth());
     y = Math.floor(Math.random() * this.model.getHeight());
     this.model.setEndingNode(matrix[y][x]);
-  }
 
+    this.model.getNodeMatrix().forEach((row) => {
+      row.forEach((node) => node.color = GraphModelColorIndicators.unvisited);
+    });
+  }
 
   initRunner() {
     this.runner = new PathFinderRunner(this.model);
