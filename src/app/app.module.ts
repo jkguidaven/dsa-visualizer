@@ -15,7 +15,8 @@ import {
   MatListModule,
   MatButtonModule,
   MatSelectModule,
-  MatSliderModule
+  MatSliderModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 
@@ -50,7 +51,8 @@ import { GraphDisplayComponent } from './common/components/graph-display/graph-d
     MatListModule,
     MatButtonModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { GraphObjectModel } from '../../models/graph.model';
 
 export interface PathFinderStrategy {
-  iterator(model: GraphObjectModel);
+  iterator(model: GraphObjectModel, skip: boolean);
 }

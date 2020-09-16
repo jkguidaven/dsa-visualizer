@@ -7,7 +7,6 @@
       attr.fill="{{ getNodeColor(node) }}"
       attr.x="{{ (100 / model.getWidth()) * i }}%"
       attr.y="{{ (100 / model.getHeight()) * ri }}%"
-      attr.stroke="{{ '#fff' }}"
       attr.cursor="{{ isNodeClickable(node) ? 'pointer' : 'default' }}"
       (mousedown)="onMousedown(node)"
       (mouseover)="onMouseover(node)"

@@ -3,11 +3,13 @@
     <button
       mat-flat-button
       color="accent"
-      (click)="randomizePosition()"
+      (click)="randomize()"
       [disabled]="runner.isRunning()"
     >
       Randomize
     </button>
+
+    <mat-checkbox [(ngModel)]="withMaze">With Maze</mat-checkbox>
 
     <span class="spacer"></span>
 
@@ -54,6 +56,11 @@
     </div>
   </mat-toolbar>
 
-  <app-graph-display class="graph-display" [model]="model">
+  <app-graph-display
+    class="graph-display"
+    [model]="model"
+    [locked]="runner.isRunning()"
+    (nodeChange)="handleModelChange()"
+  >
   </app-graph-display>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GraphObjectModel, GraphNode, GraphModelColorIndicators } from '../../classes/models/graph.model';
 
 @Component({
@@ -8,9 +8,12 @@ import { GraphObjectModel, GraphNode, GraphModelColorIndicators } from '../../cl
 })
 export class GraphDisplayComponent implements OnInit {
   @Input() model: GraphObjectModel;
+  @Input() locked: boolean;
+  @Output() nodeChange: EventEmitter<any> = new EventEmitter();
 
   movingStartingNodePointer: boolean;
   movingEndingNodePointer: boolean;
+  moving: boolean;
 
 
   constructor() { }
@@ -29,29 +32,38 @@ export class GraphDisplayComponent implements OnInit {
   }
 
   isNodeClickable(node: GraphNode): boolean {
-    return this.model.isStartingNode(node) || this.model.isEndingNode(node);
+    return !this.locked && (this.model.isStartingNode(node) || this.model.isEndingNode(node));
   }
 
   onMousedown(node: GraphNode): void {
-    if (this.model.isStartingNode(node)) {
+    if (this.locked) {
+      return;
+    } else if (this.model.isStartingNode(node)) {
       this.movingStartingNodePointer = true;
     } else if (this.model.isEndingNode(node)) {
       this.movingEndingNodePointer = true;
     }
+
+    this.moving = !this.movingEndingNodePointer && !this.movingStartingNodePointer;
   }
 
   onMouseover(node: GraphNode): void {
-    if (this.movingStartingNodePointer && !this.model.isEndingNode(node)) {
+    if (this.locked) {
+      return;
+    } else if (this.movingStartingNodePointer && !this.model.isEndingNode(node) && node.color !== GraphModelColorIndicators.blocked) {
       this.model.setStartingNode(node);
-    } else if (this.movingEndingNodePointer && !this.model.isStartingNode(node)) {
+      this.nodeChange.emit(this.model);
+    } else if (this.movingEndingNodePointer && !this.model.isStartingNode(node) && node.color !== GraphModelColorIndicators.blocked) {
       this.model.setEndingNode(node);
-    } else if (!this.model.isStartingNode(node) && !this.model.isEndingNode(node)) {
-      // TO-DO make this node as weighted node
+      this.nodeChange.emit(this.model);
+    } else if (this.moving && !this.model.isStartingNode(node) && !this.model.isEndingNode(node)) {
+      node.color = GraphModelColorIndicators.blocked;
     }
   }
 
   onMouseup(): void {
     this.movingStartingNodePointer = false;
     this.movingEndingNodePointer = false;
+    this.moving = false;
   }
 }

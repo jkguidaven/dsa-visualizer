@@ -2,7 +2,7 @@ import { PathFinderStrategy } from './pathfinder-strategy';
 import { GraphObjectModel, GraphModelColorIndicators, GraphNode } from '../../models/graph.model';
 
 export class BreadthFirstPathFinderStrategy implements PathFinderStrategy {
-  *iterator(model: GraphObjectModel) {
+  *iterator(model: GraphObjectModel, skip: boolean) {
     const queue: GraphNode[] = [];
     queue.push(model.getStartingNode());
 
@@ -17,13 +17,16 @@ export class BreadthFirstPathFinderStrategy implements PathFinderStrategy {
           currentNode.parentNode.color = GraphModelColorIndicators.routed;
           currentNode = currentNode.parentNode;
         }
+
+        model.setSolved(true);
         return model;
-      } else {
+      } else if (!skip) {
         yield model;
       }
 
       currentNode.neighbors.forEach((neighbor) => {
-        if (neighbor.color !== GraphModelColorIndicators.visited) {
+        if (neighbor.color !== GraphModelColorIndicators.visited &&
+          neighbor.color !== GraphModelColorIndicators.blocked) {
           neighbor.color = GraphModelColorIndicators.visited;
           neighbor.parentNode = currentNode;
           queue.push(neighbor);

@@ -4,12 +4,14 @@ export enum GraphModelColorIndicators {
   visited = 'grey',
   starting = 'blue',
   ending = 'red',
-  routed = 'green'
+  routed = 'green',
+  blocked = 'black',
 }
 
 export interface GraphNode {
   weight: number;
-  value: number;
+  x: number;
+  y: number;
   color: GraphModelColorIndicators;
   neighbors: GraphNode[];
   parentNode?: GraphNode;
@@ -19,6 +21,7 @@ export class GraphObjectModel {
   private startingNode: GraphNode;
   private endingNode: GraphNode;
   private nodeMatrix: GraphNode[][];
+  private solved: boolean;
 
   constructor(private width: number, private height: number) {
     this.initData();
@@ -27,12 +30,13 @@ export class GraphObjectModel {
 
   private initData(): void {
     this.nodeMatrix = [ ...Array(this.height).keys() ]
-    .map((row) => {
+    .map((y) => {
       return [ ...Array(this.width).keys() ]
-        .map((col) => {
+        .map((x) => {
           return {
+            x,
+            y,
             weight: 0,
-            value: (row + 1) * (col + 1),
             color: GraphModelColorIndicators.unvisited,
             neighbors: []
           };
@@ -59,6 +63,15 @@ export class GraphObjectModel {
 
   getNodeMatrix(): GraphNode[][] {
     return this.nodeMatrix;
+  }
+
+  getAllNodes(): GraphNode[] {
+    return this.nodeMatrix.reduce((nodes: any[], row) => {
+      row.forEach((node) => {
+        nodes.push(node);
+      });
+      return nodes;
+    }, []);
   }
 
   setNodeMatrix(nodeMatrix: GraphNode[][]): void {
@@ -94,5 +107,25 @@ export class GraphObjectModel {
 
   isEndingNode(node: GraphNode): boolean {
     return this.endingNode && this.endingNode === node;
+  }
+
+  setSolved(solved: boolean): void {
+    this.solved = solved;
+  }
+
+  isSolved(): boolean {
+    return this.solved;
+  }
+
+  reset(): void {
+    this.nodeMatrix.forEach((row) => {
+      row.forEach((item) => {
+        item.color = item.color !== GraphModelColorIndicators.blocked
+          ? GraphModelColorIndicators.unvisited
+          : GraphModelColorIndicators.blocked;
+        item.parentNode = null;
+      });
+    });
+    this.solved = false;
   }
 }

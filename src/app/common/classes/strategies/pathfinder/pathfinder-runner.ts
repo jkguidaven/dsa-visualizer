@@ -25,11 +25,18 @@ export class PathFinderRunner {
     this.next();
   }
 
-  init() {
-    this.iterator = this.strategy.iterator(this.model);
+  init({ quick } = { quick: false }) {
+    this.iterator = this.strategy.iterator(this.model, quick);
     this.resetStateStack();
     this.pushStateToStack(this.model);
     this.started = true;
+  }
+
+  quickRun() {
+    this.init({ quick: true });
+    this.iterator.next();
+    this.started = false;
+    this.running = false;
   }
 
   next() {
