@@ -1,5 +1,6 @@
 import { PathFinderStrategy } from './pathfinder-strategy';
 import { BreadthFirstPathFinderStrategy } from './breadth-first-pathfinder.strategy';
+import { DepthFirstPathFinderStrategy } from './depth-first-pathfinder.strategy';
 
 export enum PathFinderStrategies {
   BREADTH_FIRST = 'Breadth First',
@@ -14,7 +15,7 @@ export class PathFinderStrategyFactory {
       case PathFinderStrategies.BREADTH_FIRST:
         return new BreadthFirstPathFinderStrategy();
       case PathFinderStrategies.DEPTH_FIRST:
-        return null;
+        return new DepthFirstPathFinderStrategy();
       case PathFinderStrategies.DIJKSTRA:
         return null;
       case PathFinderStrategies.A_STAR:

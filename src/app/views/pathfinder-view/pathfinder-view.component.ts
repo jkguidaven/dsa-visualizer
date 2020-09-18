@@ -37,7 +37,7 @@ export class PathfinderViewComponent implements OnInit {
   }
 
   randomize() {
-    this.model.reset();
+    this.model.reset({ hard: true });
     const matrix = this.model.getNodeMatrix();
 
     // randomize staring node
@@ -126,6 +126,7 @@ export class PathfinderViewComponent implements OnInit {
   }
 
   setAlgorithm(algorithm: string) {
+    this.model.reset();
     this.runner.setStrategy(PathFinderStrategyFactory.create(PathFinderStrategies[algorithm]));
   }
 

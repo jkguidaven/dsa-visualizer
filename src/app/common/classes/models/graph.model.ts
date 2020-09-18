@@ -117,10 +117,10 @@ export class GraphObjectModel {
     return this.solved;
   }
 
-  reset(): void {
+  reset({ hard } = { hard: false }): void {
     this.nodeMatrix.forEach((row) => {
       row.forEach((item) => {
-        item.color = item.color !== GraphModelColorIndicators.blocked
+        item.color = hard || item.color !== GraphModelColorIndicators.blocked
           ? GraphModelColorIndicators.unvisited
           : GraphModelColorIndicators.blocked;
         item.parentNode = null;
