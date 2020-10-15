@@ -1,6 +1,6 @@
 # DsaVisualizer
 
-[![Dependencies](https://img.shields.io/david/jkguidaven/dsa-visualizer)](https://david-dm.org/jkguidaven/dsa-visualizer) [![devDependencies](https://img.shields.io/david/dev/jkguidaven/dsa-visualizer)](https://david-dm.org/jkguidaven/dsa-visualizer?type=dev) [![Known Vulnerabilities](https://snyk.io/test/github/jkguidaven/dsa-visualizer/badge.svg)](https://snyk.io/test/github/SVG-Edit/svgedit)
+[![Dependencies](https://img.shields.io/david/jkguidaven/dsa-visualizer)](https://david-dm.org/jkguidaven/dsa-visualizer) [![devDependencies](https://img.shields.io/david/dev/jkguidaven/dsa-visualizer)](https://david-dm.org/jkguidaven/dsa-visualizer?type=dev) [![Known Vulnerabilities](https://snyk.io/test/github/jkguidaven/dsa-visualizer/badge.svg)](https://snyk.io/test/github/jkguidaven/dsa-visualizer)
 
 DSA Visualizer is a web-based visualizer of commonly known Software data structures and algorithms. The application
 is built using the angular framework.
