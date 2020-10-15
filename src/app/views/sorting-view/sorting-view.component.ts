@@ -10,8 +10,8 @@ import { SortRunner } from 'src/app/common/classes/strategies/sort/sort-runner';
 })
 export class SortingViewComponent implements OnInit {
   public currentAlgorithm: string;
-  private model: ArrayObjectModel = { array: [] };
-  private size = 100;
+  public model: ArrayObjectModel = { array: [] };
+  public size = 100;
 
   public runner: SortRunner;
 
