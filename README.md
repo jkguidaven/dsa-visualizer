@@ -2,6 +2,8 @@
 
 An interactive visualizer for classic sorting and pathfinding algorithms. Built as a single-page Angular application with the strategy pattern at its core — each algorithm is a generator that yields snapshots of its intermediate state, and a small runner steps through them for play / pause / step-through / scrub-back controls.
 
+**Live demo:** [https://jkguidaven.github.io/dsa-visualizer/](https://jkguidaven.github.io/dsa-visualizer/)
+
 ## Tech stack
 
 | Layer | Choice |
