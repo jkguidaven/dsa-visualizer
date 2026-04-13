@@ -214,14 +214,6 @@
   optionalDependencies:
     lmdb "3.5.1"
 
-"@angular/cdk@^21.2.6":
-  version "21.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-21.2.6.tgz#2bb3de157f4f6ce1e95da069711ce4b44f3c19c1"
-  integrity sha512-1PBzFf+um/VZ1dFF6cT72Zsq+9C/ZWF9m5dP0uHJgo4psX3yMBoZlZu5YomBiAQ/ePSkqCuryv1vrelK+yd3Mw==
-  dependencies:
-    parse5 "^8.0.0"
-    tslib "^2.3.0"
-
 "@angular/cli@^21.2.7":
   version "21.2.7"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-21.2.7.tgz#452b73c1d8abf5546406fef6ecefe9fd2721b39b"
@@ -287,13 +279,6 @@
   integrity sha512-tyQAHjfMHcqETRkKQaZHjYqIK9W8uRenPpY2DF/Jl+S7CwcaX4T8t8TKgzvTynNzQW9QGiLg0pqVosVMKzBXJg==
   dependencies:
     "@standard-schema/spec" "^1.0.0"
-    tslib "^2.3.0"
-
-"@angular/material@^21.2.6":
-  version "21.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-21.2.6.tgz#fee1aff8502da2a3f6799fb45ddcde77b6827852"
-  integrity sha512-V4hblb5ekgXb5x+UXKRs2yiB0hZUkUJbYwGseMglkCeWQlLM4u6amlsUzP4uOwIWFOkM/ZYl9qz4YGZnvMAyjw==
-  dependencies:
     tslib "^2.3.0"
 
 "@angular/platform-browser@^21.2.0":
@@ -1753,6 +1738,20 @@
   resolved "https://registry.yarnpkg.com/@standard-schema/spec/-/spec-1.1.0.tgz#a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
   integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
+"@tessera-ui/angular@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@tessera-ui/angular/-/angular-0.6.3.tgz#187cce3773a9b7f21d95e0507e386f1ac7257ad5"
+  integrity sha512-9Px5Rb1rUV7ceufku5vgHQT+IzvrfaMG8Yemt5N1FfzToiuvfvRCp2YogORFt/a0PiteLxJF2Hni+ao3pQc8Wg==
+  dependencies:
+    "@tessera-ui/core" "^0.6.3"
+
+"@tessera-ui/core@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@tessera-ui/core/-/core-0.6.3.tgz#8543f987751748d67bbb3ce96739a85b10ca4088"
+  integrity sha512-OEDLFjRZgGah22i0Ee8mxGKLmVyz5lWSdd5rAR9ZEQBUC+YMzm+VZxwiB7BsEnh6pD/5/vs86QqhAWwjFhVQdw==
+  dependencies:
+    lucide "^0.511.0"
+
 "@tufjs/canonical-json@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tufjs/canonical-json/-/canonical-json-2.0.0.tgz#a52f61a3d7374833fca945b2549bc30a2dd40d0a"
@@ -3040,6 +3039,11 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
+
+lucide@^0.511.0:
+  version "0.511.0"
+  resolved "https://registry.yarnpkg.com/lucide/-/lucide-0.511.0.tgz#92a55e8feaa995868e3562db4086e05e4e23cdc4"
+  integrity sha512-3ppKPYcCJFXBloeM1H8OyIGjzINNQgsYvAYBTYOSKO45DF/5vbTQrCvwnvMDAGgDnUlI1uFxe0gJj52jdb1JAg==
 
 magic-string@0.30.21, magic-string@^0.30.21:
   version "0.30.21"

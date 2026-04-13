@@ -2,23 +2,45 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  gap: 16px;
+}
 
-  mat-toolbar {
-    > * {
-      margin: 0 10px;
-    }
+ts-toolbar {
+  padding: 10px 14px;
+  background: var(--ts-color-bg-elevated);
+  border: 1px solid var(--ts-color-border-default);
+  border-radius: var(--ts-radius-lg);
+  box-shadow: var(--ts-shadow-md);
+}
 
-    .algorithm-select-container {
-      width: 200px;
-    }
-  }
+ts-toolbar > * {
+  margin: 0 6px;
+}
 
-  .graph-display {
-    padding: 10px 0;
-    flex-grow: 1;
-  }
+.algorithm-select {
+  width: 220px;
+  flex: none;
+}
 
-  .spacer {
-    flex: 1 1 auto;
-  }
+.controls {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--ts-color-bg-subtle);
+  border: 1px solid var(--ts-color-border-subtle);
+  border-radius: var(--ts-radius-md);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.graph-display {
+  flex-grow: 1;
+  padding: 12px;
+  background: var(--ts-color-bg-elevated);
+  border: 1px solid var(--ts-color-border-default);
+  border-radius: var(--ts-radius-lg);
+  box-shadow: var(--ts-shadow-md);
+  min-height: 0;
 }

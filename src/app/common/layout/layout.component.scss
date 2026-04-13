@@ -1,32 +1,50 @@
-.mat-sidenav-container {
+ts-app-layout {
   height: 100%;
-  background-color: transparent;
-
-  ::ng-deep .mat-sidenav {
-    background-color: #313131;
-    max-width: 250px;
-    border: none;
-  }
-
-  ::ng-deep .mat-sidenav-content {
-    margin-left: 230px !important;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .content-container {
-    flex-grow: 1;
-    padding: 10px 20px;
-  }
 }
 
-.mat-sidenav-container.full-width {
-  ::ng-deep .mat-sidenav-content {
-    margin-left: 64px !important;
-  }
+ts-sidebar {
+  background: linear-gradient(
+    180deg,
+    var(--ts-color-bg-elevated) 0%,
+    var(--ts-color-bg-subtle) 100%
+  );
+  border-right: 1px solid var(--ts-color-border-default);
 }
 
-.spacer {
+.page-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--ts-color-border-subtle);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 171, 7, 0.03) 0%,
+    transparent 100%
+  );
+}
+
+.page-header {
   flex: 1 1 auto;
+  min-width: 0;
+  padding: 20px 8px 16px 28px;
+}
+
+.theme-toggle {
+  padding: 20px 24px 0 0;
+  flex: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.content-container {
+  flex-grow: 1;
+  padding: 20px 28px;
+  overflow: auto;
+  min-height: 0;
 }

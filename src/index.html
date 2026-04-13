@@ -6,7 +6,35 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Resolve the initial theme before paint to avoid a FOUC.
+      // Priority: user-saved preference > OS prefers-color-scheme.
+      // When no preference is stored, keep following OS-level changes.
+      (function () {
+        var KEY = 'dsa-theme';
+        var stored = localStorage.getItem(KEY);
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var apply = function (theme) {
+          document.documentElement.dataset.theme = theme;
+        };
+        apply(
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : mq.matches ? 'dark' : 'light'
+        );
+        mq.addEventListener('change', function (e) {
+          if (!localStorage.getItem(KEY)) {
+            apply(e.matches ? 'dark' : 'light');
+          }
+        });
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>

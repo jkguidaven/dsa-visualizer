@@ -1,21 +1,16 @@
-<mat-sidenav-container [class.full-width]="collapseSidenav">
-  <mat-sidenav mode="side" opened>
-    <app-page-sidenav [menuItems]="menuItems()" [(collapse)]="collapseSidenav">
-    </app-page-sidenav>
-  </mat-sidenav>
+<ts-app-layout>
+  <ts-sidebar slot="sidebar" collapsible [collapsed]="collapseSidenav"
+    (tsToggle)="collapseSidenav = $event.detail.collapsed">
+    <app-page-sidenav [menuItems]="menuItems()"></app-page-sidenav>
+  </ts-sidebar>
 
-  <mat-sidenav-content>
-    <app-page-header>
-        <span title>{{ pageTitle }}</span>
-        @if (pageDescription) {
-          <span description>{{ pageDescription }}</span>
-        }
-    </app-page-header>
-
-    <mat-divider color="primary"></mat-divider>
-
+  <div class="main">
+    <header class="page-header-row">
+      <ts-page-header class="page-header" [heading]="pageTitle" [description]="pageDescription"></ts-page-header>
+      <app-theme-toggle class="theme-toggle"></app-theme-toggle>
+    </header>
     <div class="content-container">
       <ng-content></ng-content>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</ts-app-layout>

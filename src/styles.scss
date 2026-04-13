@@ -1,7 +1,13 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
+// ─────────────────────────────────────────────────────────────────────────────
+//  DSA Visualizer — "engineering notebook" theme
+//
+//  Theme strategy:
+//    - The OS color-scheme preference is mirrored onto <html data-theme="..."/>
+//      by a small inline script in index.html.
+//    - Tessera ships built-in tokens for :root (light) and [data-theme="dark"].
+//      We layer our custom amber accent + graphite palette on top of both.
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Custom font faces
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
@@ -9,7 +15,6 @@
   font-display: swap;
   src: url('/assets/fonts/Quicksand-Light.ttf') format('truetype');
 }
-
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
@@ -17,7 +22,6 @@
   font-display: swap;
   src: url('/assets/fonts/Quicksand-Regular.ttf') format('truetype');
 }
-
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
@@ -25,7 +29,6 @@
   font-display: swap;
   src: url('/assets/fonts/Quicksand-Medium.ttf') format('truetype');
 }
-
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
@@ -33,7 +36,6 @@
   font-display: swap;
   src: url('/assets/fonts/Quicksand-SemiBold.ttf') format('truetype');
 }
-
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
@@ -42,115 +44,137 @@
   src: url('/assets/fonts/Quicksand-Bold.ttf') format('truetype');
 }
 
-// Custom grey primary palette
-$custom-primary: (
-  50: #fdfdfd,
-  100: #f8f8f8,
-  200: #f3f3f3,
-  300: #eeeeee,
-  400: #d0d0d0,
-  500: #b3b3b3,
-  600: #898989,
-  700: #747474,
-  800: #545454,
-  900: #313131,
-  A100: #f5f5f5,
-  A200: #efefef,
-  A400: #bfbfbf,
-  A700: #636363,
-  contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: white,
-    400: white,
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: rgba(black, 0.87),
-    A200: white,
-    A400: white,
-    A700: white,
-  ),
-);
+// ─────────────────────────────────────────────────────────────────────────────
+//  Theme-independent overrides — typography, radii, and the amber brand voice
+//  that carries across both light and dark modes.
+// ─────────────────────────────────────────────────────────────────────────────
+:root {
+  --ts-font-family-base: 'Quicksand', ui-sans-serif, system-ui, sans-serif;
+  --ts-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
-// Custom orange/yellow accent palette
-$custom-accent: (
-  50: #fef7e1,
-  100: #fde9b2,
-  200: #fbdb80,
-  300: #face4e,
-  400: #f9c229,
-  500: #f7b90d,
-  600: #f7ab07,
-  700: #f79907,
-  800: #f68808,
-  900: #f56908,
-  A100: #f4dfb4,
-  A200: #eecb83,
-  A400: #e5a730,
-  A700: #d9800c,
-  contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: white,
-    400: white,
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: rgba(black, 0.87),
-    A200: white,
-    A400: white,
-    A700: white,
-  ),
-);
+  --ts-radius-sm: 4px;
+  --ts-radius-md: 6px;
+  --ts-radius-lg: 10px;
 
-$ui-primary: mat.m2-define-palette($custom-primary, 900);
-$ui-accent: mat.m2-define-palette($custom-accent, 600);
-$ui-warn: mat.m2-define-palette(mat.$m2-red-palette);
+  --ts-color-interactive-primary:        #f7ab07;
+  --ts-color-interactive-primary-hover:  #f9c229;
+  --ts-color-interactive-primary-subtle: rgba(247, 171, 7, 0.14);
+  --ts-color-border-selected: #f7ab07;
+  --ts-color-focus-ring: 0 0 0 2px rgba(247, 171, 7, 0.55);
+}
 
-$quicksand-typography: mat.m2-define-typography-config(
-  $font-family: 'Quicksand, sans-serif',
-);
+// ─────────────────────────────────────────────────────────────────────────────
+//  Dark-mode customisations — layered on top of Tessera's built-in
+//  [data-theme="dark"] tokens to push the palette toward a deeper graphite
+//  spine and tune the shadow depth for the dark canvas.
+// ─────────────────────────────────────────────────────────────────────────────
+[data-theme='dark'] {
+  --ts-color-bg-surface:      #0b0d10;
+  --ts-color-bg-subtle:       #111418;
+  --ts-color-bg-elevated:     #171b21;
+  --ts-color-bg-elevated-1:   #1b2028;
+  --ts-color-bg-elevated-2:   #222831;
+  --ts-color-bg-elevated-3:   #2a3039;
+  --ts-color-bg-overlay:      rgba(7, 9, 12, 0.78);
+  --ts-color-bg-hover:        rgba(247, 171, 7, 0.08);
+  --ts-color-bg-selected:     rgba(247, 171, 7, 0.14);
 
-$ui-theme: mat.m2-define-light-theme(
-  (
-    color: (
-      primary: $ui-primary,
-      accent: $ui-accent,
-      warn: $ui-warn,
-    ),
-    typography: $quicksand-typography,
-  )
-);
+  --ts-color-text-primary:    #e8e6df;
+  --ts-color-text-secondary:  #9aa0a6;
+  --ts-color-text-tertiary:   #6b7179;
 
-// Custom background override
-$background: map.get($ui-theme, background);
-$background: map.merge(
-  $background,
-  (
-    background: #464646,
-  )
-);
-$ui-theme: map.merge(
-  $ui-theme,
-  (
-    background: $background,
-  )
-);
+  --ts-color-border-default:  #20262f;
+  --ts-color-border-subtle:   #171c24;
+  --ts-color-border-strong:   #3a424d;
 
-@include mat.all-component-themes($ui-theme);
+  --ts-shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --ts-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.35);
+  --ts-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
 
+// ─────────────────────────────────────────────────────────────────────────────
+//  Page canvas
+// ─────────────────────────────────────────────────────────────────────────────
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: var(--ts-font-family-base);
+  color: var(--ts-color-text-primary);
+  background-color: var(--ts-color-bg-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+}
+
+// Light canvas — soft ivory with a warm amber glow at the top.
+[data-theme='light'] body,
+:root body {
+  background-image: radial-gradient(
+    ellipse 1200px 700px at 50% -10%,
+    rgba(247, 171, 7, 0.06),
+    transparent 70%
+  );
+}
+
+// Dark canvas — blueprint grid + warm/cool vignettes for depth.
+[data-theme='dark'] body {
+  background-image:
+    radial-gradient(
+      ellipse 1200px 900px at 50% -10%,
+      rgba(247, 171, 7, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 900px 700px at 100% 100%,
+      rgba(40, 56, 86, 0.25),
+      transparent 55%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    40px 40px,
+    40px 40px,
+    8px 8px,
+    8px 8px;
+}
+
+// Monospace for numerals and technical labels.
+.mono,
+kbd,
+code,
+[data-ts-numeric] {
+  font-family: var(--ts-font-family-mono);
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+// Slim, deliberate scrollbars.
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--ts-color-border-default);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--ts-color-border-strong);
+  background-clip: padding-box;
+}
+
+::selection {
+  background: rgba(247, 171, 7, 0.35);
+  color: #fff;
 }

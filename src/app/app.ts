@@ -16,12 +16,12 @@ export class App {
         'A Sorting Algorithm is used to rearrange a given array or list elements according ' +
         'to a comparison operator on the elements. The comparison operator is used to decide ' +
         'the new order of element in the respective data structure.',
-      icon: 'dashboard',
+      icon: 'bar-chart-3',
       link: 'sorting',
     },
     {
       label: 'Pathfinder Algorithm',
-      icon: 'dashboard',
+      icon: 'route',
       link: 'pathfinder',
       description:
         'Pathfinding algorithms are usually an attempt to solve the shortest path problem in graph theory.',

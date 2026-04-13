@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { GraphDisplayComponent } from '../../common/components/graph-display/graph-display.component';
 import {
   GraphObjectModel,
@@ -19,15 +19,8 @@ import {
 
 @Component({
   selector: 'app-pathfinder-view',
-  imports: [
-    FormsModule,
-    MatToolbarModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    GraphDisplayComponent,
-  ],
+  imports: [GraphDisplayComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './pathfinder-view.component.html',
   styleUrl: './pathfinder-view.component.scss',
 })

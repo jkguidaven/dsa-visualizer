@@ -1,30 +1,10 @@
-<mat-list [class.collapse]="collapse()">
-  <div class="menu-container">
-    @for (item of menuItems(); track item.link) {
-      <mat-list-item>
-        <div mat-line>
-          <button [routerLink]="item.link" routerLinkActive="active-link" mat-button>
-            <mat-icon>{{ item.icon }}</mat-icon>
-            @if (!collapse()) {
-              <span>{{ item.label }}</span>
-            }
-          </button>
-        </div>
-      </mat-list-item>
-    }
-  </div>
-
-  <span class="spacer"></span>
-
-  <mat-divider></mat-divider>
-
-  <div class="side-nav-control">
-    @if (!collapse()) {
-      <span class="version-info"> <b>Version:</b> {{ appVersion }} </span>
-    }
-
-    <button mat-icon-button (click)="collapse.set(!collapse())">
-      <mat-icon color="white">{{ toggleIcon }}</mat-icon>
-    </button>
-  </div>
-</mat-list>
+<ts-nav>
+  @for (item of menuItems(); track item.link) {
+    <ts-nav-item
+      [icon]="item.icon"
+      [active]="isActive(item.link)"
+      [routerLink]="item.link">
+      {{ item.label }}
+    </ts-nav-item>
+  }
+</ts-nav>

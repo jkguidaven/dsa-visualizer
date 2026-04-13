@@ -1,30 +1,19 @@
-import { Component, input, model, output } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatListModule } from '@angular/material/list';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, inject, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-page-sidenav',
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    MatListModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
+  imports: [RouterLink],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './page-sidenav.component.html',
   styleUrl: './page-sidenav.component.scss',
 })
 export class PageSidenavComponent {
   menuItems = input<any[]>([]);
-  collapse = model(false);
 
-  readonly appVersion = '1.0.0';
+  private router = inject(Router);
 
-  get toggleIcon() {
-    return this.collapse() ? 'chevron_right' : 'chevron_left';
+  isActive(link: string): boolean {
+    return this.router.url.startsWith(`/${link}`);
   }
 }

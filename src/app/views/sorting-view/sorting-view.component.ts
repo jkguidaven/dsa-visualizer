@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { ArrayDisplayComponent } from '../../common/components/array-display/array-display.component';
 import {
   ArrayObjectModel,
@@ -18,15 +18,8 @@ import { SortRunner } from '../../common/classes/strategies/sort/sort-runner';
 
 @Component({
   selector: 'app-sorting-view',
-  imports: [
-    FormsModule,
-    MatToolbarModule,
-    MatSliderModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    ArrayDisplayComponent,
-  ],
+  imports: [ArrayDisplayComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './sorting-view.component.html',
   styleUrl: './sorting-view.component.scss',
 })

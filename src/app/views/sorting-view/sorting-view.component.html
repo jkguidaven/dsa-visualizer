@@ -1,62 +1,52 @@
 <div class="container">
-  <mat-toolbar>
-    <mat-slider
+  <ts-toolbar>
+    <ts-slider
+      class="size-slider"
       [disabled]="runner.isRunning()"
       min="5"
       max="100"
       step="1"
-      discrete
-    >
-      <input matSliderThumb [(ngModel)]="size" (valueChange)="generateModel()">
-    </mat-slider>
+      [value]="size"
+      (tsChange)="size = $event.detail.value; generateModel()">
+    </ts-slider>
 
-    <button
-      mat-flat-button
-      color="accent"
-      (click)="generateModel()"
-      [disabled]="runner.isRunning()"
-    >
+    <ts-button
+      variant="primary"
+      (tsClick)="generateModel()"
+      [disabled]="runner.isRunning()">
       Randomize
-    </button>
+    </ts-button>
 
     <span class="spacer"></span>
 
-    <div class="algorithm-select-container">
-      <mat-select
-        [(value)]="currentAlgorithm"
-        [disabled]="runner.isRunning()"
-        name="algorithm-selection"
-      >
-        @for (algorithm of getSupportedAlgorithms(); track algorithm) {
-          <mat-option
-            [value]="algorithm"
-            (click)="setAlgorithm(algorithm)"
-          >
-            {{ algorithm }}
-          </mat-option>
-        }
-      </mat-select>
+    <ts-select
+      class="algorithm-select"
+      [value]="currentAlgorithm"
+      [disabled]="runner.isRunning()"
+      (tsChange)="setAlgorithm($event.detail.value)">
+      @for (algorithm of getSupportedAlgorithms(); track algorithm) {
+        <option [value]="algorithm">{{ algorithm }}</option>
+      }
+    </ts-select>
+
+    <div class="controls">
+      <ts-button appearance="ghost" size="sm" (tsClick)="previous()" [disabled]="!canNavigateBack()">
+        <ts-icon name="chevron-left"></ts-icon>
+      </ts-button>
+
+      <ts-button appearance="ghost" size="sm" (tsClick)="play()">
+        <ts-icon [name]="runner.isRunning() ? 'pause' : 'play'"></ts-icon>
+      </ts-button>
+
+      <ts-button appearance="ghost" size="sm" (tsClick)="stop()" [disabled]="!runner.hasStarted()">
+        <ts-icon name="square"></ts-icon>
+      </ts-button>
+
+      <ts-button appearance="ghost" size="sm" (tsClick)="next()" [disabled]="runner.isRunning()">
+        <ts-icon name="chevron-right"></ts-icon>
+      </ts-button>
     </div>
+  </ts-toolbar>
 
-    <div>
-      <button mat-icon-button (click)="previous()" [disabled]="!canNavigateBack()">
-        <mat-icon>navigate_before</mat-icon>
-      </button>
-
-      <button mat-icon-button (click)="play()">
-        <mat-icon>{{ runner.isRunning() ? 'pause' : 'play_arrow' }}</mat-icon>
-      </button>
-
-      <button mat-icon-button (click)="stop()" [disabled]="!runner.hasStarted()">
-        <mat-icon>stop</mat-icon>
-      </button>
-
-      <button mat-icon-button (click)="next()" [disabled]="runner.isRunning()">
-        <mat-icon>navigate_next</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar>
-
-  <app-array-display class="array-display" [model]="model">
-  </app-array-display>
+  <app-array-display class="array-display" [model]="model"></app-array-display>
 </div>

@@ -1,20 +1,12 @@
-import { Component, inject, input } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDividerModule } from '@angular/material/divider';
-import { PageHeaderComponent } from './page-header/page-header.component';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, inject, input } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageSidenavComponent } from './page-sidenav/page-sidenav.component';
+import { ThemeToggleComponent } from '../theme-toggle.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [
-    MatSidenavModule,
-    MatToolbarModule,
-    MatDividerModule,
-    PageHeaderComponent,
-    PageSidenavComponent,
-  ],
+  imports: [PageSidenavComponent, ThemeToggleComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
