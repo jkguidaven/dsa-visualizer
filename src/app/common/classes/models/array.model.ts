@@ -9,8 +9,8 @@ export interface ArrayObjectModel {
 }
 
 export enum ArrayModelColorIndicators {
-  unsorted = 'lightgrey',
-  traverse = 'grey',
+  unsorted = 'var(--app-cell-default)',
+  traverse = 'var(--app-cell-traverse)',
   sorted = 'green',
   compared = 'blue',
   temporarysorted = 'violet'

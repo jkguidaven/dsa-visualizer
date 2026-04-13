@@ -1,7 +1,7 @@
 
 export enum GraphModelColorIndicators {
-  unvisited = 'lightgrey',
-  visited = 'grey',
+  unvisited = 'var(--app-cell-default)',
+  visited = 'var(--app-cell-traverse)',
   starting = 'blue',
   ending = 'red',
   routed = 'green',

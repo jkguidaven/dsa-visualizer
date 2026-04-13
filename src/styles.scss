@@ -47,8 +47,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 //  Theme-independent overrides — typography, radii, and the amber brand voice
 //  that carries across both light and dark modes.
+//  Uses :root[data-theme] (specificity 0,1,1) so it outranks Tessera's :root
+//  (0,0,1) rule which is injected at runtime after the app stylesheet.
 // ─────────────────────────────────────────────────────────────────────────────
-:root {
+:root[data-theme] {
   --ts-font-family-base: 'Quicksand', ui-sans-serif, system-ui, sans-serif;
   --ts-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
@@ -56,11 +58,38 @@
   --ts-radius-md: 6px;
   --ts-radius-lg: 10px;
 
+  // Amber brand ramp — overrides the default blue reference palette so any
+  // component reading from the primary scale (buttons, sliders, selection
+  // indicators, etc.) speaks in a single chromatic voice.
+  --ts-ref-primary-50:  #fff8e6;
+  --ts-ref-primary-100: #fdecb8;
+  --ts-ref-primary-200: #fbdb80;
+  --ts-ref-primary-300: #face4e;
+  --ts-ref-primary-400: #f9c229;
+  --ts-ref-primary-500: #f7ab07;
+  --ts-ref-primary-600: #e0970a;
+  --ts-ref-primary-700: #b57707;
+  --ts-ref-primary-800: #8a5a05;
+  --ts-ref-primary-900: #5c3c03;
+
   --ts-color-interactive-primary:        #f7ab07;
   --ts-color-interactive-primary-hover:  #f9c229;
   --ts-color-interactive-primary-subtle: rgba(247, 171, 7, 0.14);
-  --ts-color-border-selected: #f7ab07;
+  --ts-color-border-selected:            #f7ab07;
   --ts-color-focus-ring: 0 0 0 2px rgba(247, 171, 7, 0.55);
+  --ts-color-text-on-primary:            #1a1205;
+
+  // ── Canvas cell defaults (used by the SVG visualizations) ─────────────────
+  // Light theme retains the original greys. Dark theme shifts them toward
+  // lifted-from-background tones so the chrome reads as "part of the canvas"
+  // rather than bright paint splashed on it.
+  --app-cell-default:  lightgrey;
+  --app-cell-traverse: grey;
+}
+
+:root[data-theme='dark'] {
+  --app-cell-default:  #232a38;
+  --app-cell-traverse: #394256;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,14 +97,15 @@
 //  [data-theme="dark"] tokens to push the palette toward a deeper graphite
 //  spine and tune the shadow depth for the dark canvas.
 // ─────────────────────────────────────────────────────────────────────────────
-[data-theme='dark'] {
-  --ts-color-bg-surface:      #0b0d10;
-  --ts-color-bg-subtle:       #111418;
-  --ts-color-bg-elevated:     #171b21;
-  --ts-color-bg-elevated-1:   #1b2028;
-  --ts-color-bg-elevated-2:   #222831;
-  --ts-color-bg-elevated-3:   #2a3039;
-  --ts-color-bg-overlay:      rgba(7, 9, 12, 0.78);
+:root[data-theme='dark'] {
+  // Deeper, cleaner graphite base — gives elevated panels clearer separation.
+  --ts-color-bg-surface:      #07090d;
+  --ts-color-bg-subtle:       #0e1118;
+  --ts-color-bg-elevated:     #141823;
+  --ts-color-bg-elevated-1:   #1a1f2c;
+  --ts-color-bg-elevated-2:   #222836;
+  --ts-color-bg-elevated-3:   #2a3142;
+  --ts-color-bg-overlay:      rgba(4, 6, 10, 0.82);
   --ts-color-bg-hover:        rgba(247, 171, 7, 0.08);
   --ts-color-bg-selected:     rgba(247, 171, 7, 0.14);
 
@@ -120,30 +150,18 @@ body {
   );
 }
 
-// Dark canvas — blueprint grid + warm/cool vignettes for depth.
+// Dark canvas — one calm radial bloom from the top-left, fading into
+// near-black. No grid, no competing vignettes. Lets elevated panels be
+// the focus while still giving the page a sense of depth.
 [data-theme='dark'] body {
-  background-image:
+  background:
     radial-gradient(
-      ellipse 1200px 900px at 50% -10%,
-      rgba(247, 171, 7, 0.06),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 900px 700px at 100% 100%,
-      rgba(40, 56, 86, 0.25),
-      transparent 55%
-    ),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
-  background-size:
-    100% 100%,
-    100% 100%,
-    40px 40px,
-    40px 40px,
-    8px 8px,
-    8px 8px;
+      ellipse 1400px 1000px at 0% 0%,
+      #161c2a 0%,
+      #0c0f16 45%,
+      #07090d 100%
+    );
+  background-attachment: fixed;
 }
 
 // Monospace for numerals and technical labels.
