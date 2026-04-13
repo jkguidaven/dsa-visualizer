@@ -18,10 +18,10 @@ export interface GraphNode {
 }
 
 export class GraphObjectModel {
-  private startingNode: GraphNode;
-  private endingNode: GraphNode;
-  private nodeMatrix: GraphNode[][];
-  private solved: boolean;
+  private startingNode!: GraphNode;
+  private endingNode!: GraphNode;
+  private nodeMatrix!: GraphNode[][];
+  private solved!: boolean;
 
   constructor(private width: number, private height: number) {
     this.initData();
@@ -123,7 +123,7 @@ export class GraphObjectModel {
         item.color = hard || item.color !== GraphModelColorIndicators.blocked
           ? GraphModelColorIndicators.unvisited
           : GraphModelColorIndicators.blocked;
-        item.parentNode = null;
+        item.parentNode = undefined;
       });
     });
     this.solved = false;

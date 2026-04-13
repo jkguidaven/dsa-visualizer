@@ -1,36 +1,30 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { version } from '../../../../../package.json';
-import { EventEmitter } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-page-sidenav',
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    MatListModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './page-sidenav.component.html',
-  styleUrls: ['./page-sidenav.component.scss'],
+  styleUrl: './page-sidenav.component.scss',
 })
-export class PageSidenavComponent implements OnInit {
-  @Output() collapseChange: EventEmitter<boolean> = new EventEmitter();
-  @Input() menuItems: any[] = [];
-  collapseValue: boolean;
+export class PageSidenavComponent {
+  menuItems = input<any[]>([]);
+  collapse = model(false);
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  @Input()
-  get collapse() {
-    return this.collapseValue;
-  }
-
-  set collapse(value) {
-    this.collapseValue = value;
-    this.collapseChange.emit(this.collapseValue);
-  }
-
-  get appVersion() {
-    return version;
-  }
+  readonly appVersion = '1.0.0';
 
   get toggleIcon() {
-    return this.collapse ? 'chevron_right' : 'chevron_left';
+    return this.collapse() ? 'chevron_right' : 'chevron_left';
   }
 }

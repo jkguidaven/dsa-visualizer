@@ -10,7 +10,7 @@ export class QuickSortStrategy implements SortStrategy {
     return model;
   }
 
-  *quickSort(model: ArrayObjectModel, low: number, high: number) {
+  *quickSort(model: ArrayObjectModel, low: number, high: number): Generator {
     if (low < high) {
 
         const partitionIterator = this.partition(model, low, high);

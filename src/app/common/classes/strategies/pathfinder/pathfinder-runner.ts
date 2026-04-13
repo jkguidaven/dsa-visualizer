@@ -2,13 +2,15 @@ import { PathFinderStrategy } from './pathfinder-strategy';
 import { GraphObjectModel, GraphModelColorIndicators } from '../../models/graph.model';
 
 export class PathFinderRunner {
-  private stateStack: GraphObjectModel[];
+  private stateStack: GraphObjectModel[] = [];
   private statePointer = -1;
   private speed = 1;
   private running = false;
   private started = false;
-  private strategy: PathFinderStrategy;
+  private strategy!: PathFinderStrategy;
   private iterator: any;
+
+  onUpdate: () => void = () => {};
 
   constructor(private model: GraphObjectModel) {
     this.speed = 1;
@@ -48,15 +50,18 @@ export class PathFinderRunner {
       if (this.statePointer < this.stateStack.length - 1) {
         const record = this.stateStack[++this.statePointer];
         this.model.setNodeMatrix(this.getCopyOfMatrix(record));
+        this.onUpdate();
         this.next();
       } else {
         const state = this.iterator.next();
         this.pushStateToStack(state.value);
+        this.onUpdate();
         if (this.running && !state.done) {
           this.next();
         } else if (state.done) {
           this.started = false;
           this.running = false;
+          this.onUpdate();
         }
       }
     }, this.speed);
@@ -66,6 +71,7 @@ export class PathFinderRunner {
     if (this.statePointer > 0) {
       const record = this.stateStack[--this.statePointer];
       this.model.setNodeMatrix(this.getCopyOfMatrix(record));
+      this.onUpdate();
     }
   }
 
@@ -78,6 +84,7 @@ export class PathFinderRunner {
         node.color = GraphModelColorIndicators.unvisited;
       });
     });
+    this.onUpdate();
   }
 
   pause() {

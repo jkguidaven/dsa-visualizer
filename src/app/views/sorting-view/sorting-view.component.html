@@ -4,11 +4,10 @@
       [disabled]="runner.isRunning()"
       min="5"
       max="100"
-      [step]="1"
-      [(ngModel)]="size"
-      (change)="generateModel()"
-      thumbLabel
+      step="1"
+      discrete
     >
+      <input matSliderThumb [(ngModel)]="size" (valueChange)="generateModel()">
     </mat-slider>
 
     <button
@@ -28,39 +27,32 @@
         [disabled]="runner.isRunning()"
         name="algorithm-selection"
       >
-        <mat-option
-          *ngFor="let algorithm of getSupportedAlgorithms()"
-          [value]="algorithm"
-          (click)="setAlgorithm(algorithm)"
-        >
-          {{ algorithm }}
-        </mat-option>
+        @for (algorithm of getSupportedAlgorithms(); track algorithm) {
+          <mat-option
+            [value]="algorithm"
+            (click)="setAlgorithm(algorithm)"
+          >
+            {{ algorithm }}
+          </mat-option>
+        }
       </mat-select>
     </div>
 
     <div>
-      <button mat-icon-button (click)="previous()"  [disabled]="!canNavigateBack()">
-        <mat-icon>
-          navigate_before
-        </mat-icon>
+      <button mat-icon-button (click)="previous()" [disabled]="!canNavigateBack()">
+        <mat-icon>navigate_before</mat-icon>
       </button>
 
       <button mat-icon-button (click)="play()">
-        <mat-icon>
-          {{ runner.isRunning() ? 'pause' : 'play_arrow' }}
-        </mat-icon>
+        <mat-icon>{{ runner.isRunning() ? 'pause' : 'play_arrow' }}</mat-icon>
       </button>
 
       <button mat-icon-button (click)="stop()" [disabled]="!runner.hasStarted()">
-        <mat-icon>
-          stop
-        </mat-icon>
+        <mat-icon>stop</mat-icon>
       </button>
 
       <button mat-icon-button (click)="next()" [disabled]="runner.isRunning()">
-        <mat-icon>
-          navigate_next
-        </mat-icon>
+        <mat-icon>navigate_next</mat-icon>
       </button>
     </div>
   </mat-toolbar>

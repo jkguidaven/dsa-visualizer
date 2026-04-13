@@ -10,7 +10,7 @@ export class MergeSortStrategy implements SortStrategy {
     return model;
   }
 
-  *mergeSort(model: ArrayObjectModel, left: number, right: number) {
+  *mergeSort(model: ArrayObjectModel, left: number, right: number): Generator {
     if (left < right) {
         // Calculate middle
         const middle = Math.floor(left + (right - left) / 2);
@@ -45,18 +45,18 @@ export class MergeSortStrategy implements SortStrategy {
       rightCompare.color = ArrayModelColorIndicators.compared;
       yield model;
       model.array[currentIndex++] = leftCompare.value < rightCompare.value
-        ? leftArray.shift()
-        : rightArray.shift();
+        ? leftArray.shift()!
+        : rightArray.shift()!;
     }
 
     yield model;
 
     while (leftArray.length) {
-      model.array[currentIndex++] = leftArray.shift();
+      model.array[currentIndex++] = leftArray.shift()!;
     }
 
     while (rightArray.length) {
-      model.array[currentIndex++] = rightArray.shift();
+      model.array[currentIndex++] = rightArray.shift()!;
     }
 
     for (let i = left; i <= right; i++) {

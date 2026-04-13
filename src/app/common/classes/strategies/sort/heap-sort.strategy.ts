@@ -28,7 +28,7 @@ export class HeapSortStrategy implements SortStrategy {
     return model;
   }
 
-  *heapify(model: ArrayObjectModel, n: number, i: number) {
+  *heapify(model: ArrayObjectModel, n: number, i: number): Generator {
     for (let x = 0; x < i; x++) {
       model.array[x].color = ArrayModelColorIndicators.unsorted;
     }

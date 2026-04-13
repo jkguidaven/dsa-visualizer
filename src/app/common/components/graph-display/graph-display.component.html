@@ -1,16 +1,19 @@
 <svg>
-  <g *ngFor="let row of model.getNodeMatrix(); let ri = index">
-    <rect
-      *ngFor="let node of row; let i = index"
-      attr.width="{{ 100 / model.getWidth() }}%"
-      attr.height="{{ 100 / model.getHeight() }}%"
-      attr.fill="{{ getNodeColor(node) }}"
-      attr.x="{{ (100 / model.getWidth()) * i }}%"
-      attr.y="{{ (100 / model.getHeight()) * ri }}%"
-      attr.cursor="{{ isNodeClickable(node) ? 'pointer' : 'default' }}"
-      (mousedown)="onMousedown(node)"
-      (mouseover)="onMouseover(node)"
-      (mouseup)="onMouseup()"
-    />
-  </g>
+  @for (row of model().getNodeMatrix(); track ri; let ri = $index) {
+    <g>
+      @for (node of row; track i; let i = $index) {
+        <rect
+          attr.width="{{ 100 / model().getWidth() }}%"
+          attr.height="{{ 100 / model().getHeight() }}%"
+          attr.fill="{{ getNodeColor(node) }}"
+          attr.x="{{ (100 / model().getWidth()) * i }}%"
+          attr.y="{{ (100 / model().getHeight()) * ri }}%"
+          attr.cursor="{{ isNodeClickable(node) ? 'pointer' : 'default' }}"
+          (mousedown)="onMousedown(node)"
+          (mouseover)="onMouseover(node)"
+          (mouseup)="onMouseup()"
+        />
+      }
+    </g>
+  }
 </svg>

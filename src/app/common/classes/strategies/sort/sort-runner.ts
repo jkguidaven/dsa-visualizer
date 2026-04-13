@@ -2,13 +2,15 @@ import { SortStrategy } from './sort-strategy';
 import { ArrayObjectModel, ArrayModelColorIndicators } from '../../models/array.model';
 
 export class SortRunner {
-  private stateStack: ArrayObjectModel[];
+  private stateStack: ArrayObjectModel[] = [];
   private statePointer = -1;
   private speed = 1;
   private running = false;
   private started = false;
-  private strategy: SortStrategy;
+  private strategy!: SortStrategy;
   private iterator: any;
+
+  onUpdate: () => void = () => {};
 
   constructor(private model: ArrayObjectModel) {
     this.speed = 1000 / model.array.length;
@@ -41,15 +43,18 @@ export class SortRunner {
       if (this.statePointer < this.stateStack.length - 1) {
         const record = this.stateStack[++this.statePointer];
         this.model.array = [ ...record.array ];
+        this.onUpdate();
         this.next();
       } else {
         const state = this.iterator.next();
         this.pushStateToStack(state.value);
+        this.onUpdate();
         if (this.running && !state.done) {
           this.next();
         } else if (state.done) {
           this.started = false;
           this.running = false;
+          this.onUpdate();
         }
       }
     }, this.speed);
@@ -59,6 +64,7 @@ export class SortRunner {
     if (this.statePointer > 0) {
       const record = this.stateStack[--this.statePointer];
       this.model.array = [ ...record.array ];
+      this.onUpdate();
     }
   }
 
@@ -69,6 +75,7 @@ export class SortRunner {
     this.model.array.forEach((item) => {
       item.color = ArrayModelColorIndicators.unsorted;
     });
+    this.onUpdate();
   }
 
   pause() {

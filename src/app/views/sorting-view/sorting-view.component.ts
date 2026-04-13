@@ -1,21 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { ArrayObjectModel, ArrayModelColorIndicators } from 'src/app/common/classes/models/array.model';
-import { SortStrategyFactory, SortStrategies } from 'src/app/common/classes/strategies/sort/sort-strategy.factory';
-import { SortRunner } from 'src/app/common/classes/strategies/sort/sort-runner';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { ArrayDisplayComponent } from '../../common/components/array-display/array-display.component';
+import {
+  ArrayObjectModel,
+  ArrayModelColorIndicators,
+} from '../../common/classes/models/array.model';
+import {
+  SortStrategyFactory,
+  SortStrategies,
+} from '../../common/classes/strategies/sort/sort-strategy.factory';
+import { SortRunner } from '../../common/classes/strategies/sort/sort-runner';
 
 @Component({
   selector: 'app-sorting-view',
+  imports: [
+    FormsModule,
+    MatToolbarModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    ArrayDisplayComponent,
+  ],
   templateUrl: './sorting-view.component.html',
-  styleUrls: ['./sorting-view.component.scss']
+  styleUrl: './sorting-view.component.scss',
 })
 export class SortingViewComponent implements OnInit {
-  public currentAlgorithm: string;
-  public model: ArrayObjectModel = { array: [] };
-  public size = 100;
+  private cdr = inject(ChangeDetectorRef);
 
-  public runner: SortRunner;
-
-  constructor() { }
+  currentAlgorithm!: string;
+  model: ArrayObjectModel = { array: [] };
+  size = 100;
+  runner!: SortRunner;
 
   ngOnInit() {
     this.currentAlgorithm = this.getSupportedAlgorithms()[0];
@@ -38,7 +59,7 @@ export class SortingViewComponent implements OnInit {
     for (let i = 1; i <= this.size; i++) {
       this.model.array.push({
         value: i,
-        color: ArrayModelColorIndicators.unsorted
+        color: ArrayModelColorIndicators.unsorted,
       });
     }
   }
@@ -58,22 +79,26 @@ export class SortingViewComponent implements OnInit {
 
   initRunner() {
     this.runner = new SortRunner(this.model);
+    this.runner.onUpdate = () => this.cdr.markForCheck();
     this.setAlgorithm(this.currentAlgorithm);
   }
 
-  getSupportedAlgorithms(): any[] {
+  getSupportedAlgorithms(): string[] {
     return Object.keys(SortStrategies);
   }
 
   setAlgorithm(algorithm: string) {
-    this.runner.setStrategy(SortStrategyFactory.create(SortStrategies[algorithm]));
+    const strategy = SortStrategyFactory.create(
+      (SortStrategies as any)[algorithm]
+    );
+    if (strategy) {
+      this.runner.setStrategy(strategy);
+    }
   }
 
   play() {
     if (this.runner.hasStarted()) {
-      this.runner.isRunning()
-        ? this.runner.pause()
-        : this.runner.resume();
+      this.runner.isRunning() ? this.runner.pause() : this.runner.resume();
     } else {
       this.runner.run();
     }

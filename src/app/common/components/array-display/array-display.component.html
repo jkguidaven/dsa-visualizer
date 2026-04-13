@@ -1,9 +1,13 @@
-<svg>
-  <rect *ngFor="let item of model.array; let i = index"
-    attr.width="{{ 100 / model.array.length }}%"
-    attr.height="{{ (item.value / model.array.length)  * 100 }}%"
-    attr.fill="{{ item.color }}"
-    attr.x="{{ (100 / model.array.length) * i }}%"
-    attr.y="{{ 100 - ((item.value / model.array.length)  * 100) }}%"
-  />
-</svg>
+@if (model(); as m) {
+  <svg>
+    @for (item of m.array; track $index; let i = $index) {
+      <rect
+        attr.width="{{ 100 / m.array.length }}%"
+        attr.height="{{ (item.value / m.array.length) * 100 }}%"
+        attr.fill="{{ item.color }}"
+        attr.x="{{ (100 / m.array.length) * i }}%"
+        attr.y="{{ 100 - ((item.value / m.array.length) * 100) }}%"
+      />
+    }
+  </svg>
+}

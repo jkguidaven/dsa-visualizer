@@ -1,16 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ArrayObjectModel } from '../../classes/models/array.model';
 
 @Component({
   selector: 'app-array-display',
+  imports: [],
   templateUrl: './array-display.component.html',
-  styleUrls: ['./array-display.component.scss']
+  styleUrl: './array-display.component.scss',
 })
-export class ArrayDisplayComponent implements OnInit {
-  @Input() model: ArrayObjectModel = null;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class ArrayDisplayComponent {
+  model = input<ArrayObjectModel | null>(null);
 }

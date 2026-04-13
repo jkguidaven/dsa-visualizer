@@ -16,7 +16,7 @@ export enum SortStrategies {
 }
 
 export class SortStrategyFactory {
-  public static create(strategy: SortStrategies): SortStrategy {
+  public static create(strategy: SortStrategies): SortStrategy | null {
     switch (strategy) {
       case SortStrategies.BUBBLE_SORT:
         return new BubbleSortStrategy();

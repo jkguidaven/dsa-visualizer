@@ -1,30 +1,30 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { GraphObjectModel, GraphNode, GraphModelColorIndicators } from '../../classes/models/graph.model';
+import { Component, input, output } from '@angular/core';
+import {
+  GraphObjectModel,
+  GraphNode,
+  GraphModelColorIndicators,
+} from '../../classes/models/graph.model';
 
 @Component({
   selector: 'app-graph-display',
+  imports: [],
   templateUrl: './graph-display.component.html',
-  styleUrls: ['./graph-display.component.scss']
+  styleUrl: './graph-display.component.scss',
 })
-export class GraphDisplayComponent implements OnInit {
-  @Input() model: GraphObjectModel;
-  @Input() locked: boolean;
-  @Output() nodeChange: EventEmitter<any> = new EventEmitter();
+export class GraphDisplayComponent {
+  model = input.required<GraphObjectModel>();
+  locked = input(false);
+  nodeChange = output<any>();
 
-  movingStartingNodePointer: boolean;
-  movingEndingNodePointer: boolean;
-  moving: boolean;
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  movingStartingNodePointer = false;
+  movingEndingNodePointer = false;
+  moving = false;
 
   getNodeColor(node: GraphNode): string {
-    if (this.model.isStartingNode(node)) {
+    const m = this.model();
+    if (m.isStartingNode(node)) {
       return GraphModelColorIndicators.starting;
-    } else if (this.model.isEndingNode(node)) {
+    } else if (m.isEndingNode(node)) {
       return GraphModelColorIndicators.ending;
     } else {
       return node.color;
@@ -32,31 +32,47 @@ export class GraphDisplayComponent implements OnInit {
   }
 
   isNodeClickable(node: GraphNode): boolean {
-    return !this.locked && (this.model.isStartingNode(node) || this.model.isEndingNode(node));
+    const m = this.model();
+    return !this.locked() && (m.isStartingNode(node) || m.isEndingNode(node));
   }
 
   onMousedown(node: GraphNode): void {
-    if (this.locked) {
+    const m = this.model();
+    if (this.locked()) {
       return;
-    } else if (this.model.isStartingNode(node)) {
+    } else if (m.isStartingNode(node)) {
       this.movingStartingNodePointer = true;
-    } else if (this.model.isEndingNode(node)) {
+    } else if (m.isEndingNode(node)) {
       this.movingEndingNodePointer = true;
     }
 
-    this.moving = !this.movingEndingNodePointer && !this.movingStartingNodePointer;
+    this.moving =
+      !this.movingEndingNodePointer && !this.movingStartingNodePointer;
   }
 
   onMouseover(node: GraphNode): void {
-    if (this.locked) {
+    const m = this.model();
+    if (this.locked()) {
       return;
-    } else if (this.movingStartingNodePointer && !this.model.isEndingNode(node) && node.color !== GraphModelColorIndicators.blocked) {
-      this.model.setStartingNode(node);
-      this.nodeChange.emit(this.model);
-    } else if (this.movingEndingNodePointer && !this.model.isStartingNode(node) && node.color !== GraphModelColorIndicators.blocked) {
-      this.model.setEndingNode(node);
-      this.nodeChange.emit(this.model);
-    } else if (this.moving && !this.model.isStartingNode(node) && !this.model.isEndingNode(node)) {
+    } else if (
+      this.movingStartingNodePointer &&
+      !m.isEndingNode(node) &&
+      node.color !== GraphModelColorIndicators.blocked
+    ) {
+      m.setStartingNode(node);
+      this.nodeChange.emit(m);
+    } else if (
+      this.movingEndingNodePointer &&
+      !m.isStartingNode(node) &&
+      node.color !== GraphModelColorIndicators.blocked
+    ) {
+      m.setEndingNode(node);
+      this.nodeChange.emit(m);
+    } else if (
+      this.moving &&
+      !m.isStartingNode(node) &&
+      !m.isEndingNode(node)
+    ) {
       node.color = GraphModelColorIndicators.blocked;
     }
   }

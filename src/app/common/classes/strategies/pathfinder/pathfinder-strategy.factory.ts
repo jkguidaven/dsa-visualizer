@@ -10,7 +10,7 @@ export enum PathFinderStrategies {
 }
 
 export class PathFinderStrategyFactory {
-  public static create(strategy: PathFinderStrategies): PathFinderStrategy {
+  public static create(strategy: PathFinderStrategies): PathFinderStrategy | null {
     switch (strategy) {
       case PathFinderStrategies.BREADTH_FIRST:
         return new BreadthFirstPathFinderStrategy();

@@ -29,8 +29,9 @@ export class DepthFirstPathFinderStrategy implements PathFinderStrategy {
         if (neighbor.color !== GraphModelColorIndicators.visited &&
           neighbor.color !== GraphModelColorIndicators.blocked) {
           neighbor.parentNode = currentNode;
-          return neighbor;
+          return true;
         }
+        return false;
       });
 
       if (next) {

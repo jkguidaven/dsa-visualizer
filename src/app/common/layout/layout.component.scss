@@ -1,19 +1,14 @@
-@import '../../../styles.scss';
-
-$accent: map-get($ui-theme, accent);
-$primary: map-get($ui-theme, primary);
-
-.mat-sidenav-container::ng-deep {
+.mat-sidenav-container {
   height: 100%;
   background-color: transparent;
 
-  .mat-sidenav {
-    background-color: mat-color($primary);
+  ::ng-deep .mat-sidenav {
+    background-color: #313131;
     max-width: 250px;
     border: none;
   }
 
-  .mat-sidenav-content {
+  ::ng-deep .mat-sidenav-content {
     margin-left: 230px !important;
     height: 100%;
     display: flex;
@@ -26,8 +21,8 @@ $primary: map-get($ui-theme, primary);
   }
 }
 
-.mat-sidenav-container.full-width::ng-deep {
-  .mat-sidenav-content {
+.mat-sidenav-container.full-width {
+  ::ng-deep .mat-sidenav-content {
     margin-left: 64px !important;
   }
 }

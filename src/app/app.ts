@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { LayoutComponent } from './common/layout/layout.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  imports: [RouterOutlet, LayoutComponent],
+  templateUrl: './app.html',
+  styleUrl: './app.scss',
 })
-export class AppComponent {
+export class App {
   menuItems: any[] = [
     {
       label: 'Sorting Algorithm',
@@ -14,7 +17,7 @@ export class AppComponent {
         'to a comparison operator on the elements. The comparison operator is used to decide ' +
         'the new order of element in the respective data structure.',
       icon: 'dashboard',
-      link: 'sorting'
+      link: 'sorting',
     },
     {
       label: 'Pathfinder Algorithm',

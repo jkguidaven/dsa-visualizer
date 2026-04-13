@@ -1,13 +1,17 @@
-<mat-list [ngClass]="{ collapse: collapse }">
+<mat-list [class.collapse]="collapse()">
   <div class="menu-container">
-    <mat-list-item *ngFor="let item of menuItems">
-      <div mat-line>
-        <button [routerLink]="item.link" routerLinkActive="mat-accent" mat-button>
-          <mat-icon mat-icon>{{ item.icon }}</mat-icon>
-          <span *ngIf="!collapse">{{ item.label }}</span>
-        </button>
-      </div>
-    </mat-list-item>
+    @for (item of menuItems(); track item.link) {
+      <mat-list-item>
+        <div mat-line>
+          <button [routerLink]="item.link" routerLinkActive="active-link" mat-button>
+            <mat-icon>{{ item.icon }}</mat-icon>
+            @if (!collapse()) {
+              <span>{{ item.label }}</span>
+            }
+          </button>
+        </div>
+      </mat-list-item>
+    }
   </div>
 
   <span class="spacer"></span>
@@ -15,10 +19,12 @@
   <mat-divider></mat-divider>
 
   <div class="side-nav-control">
-    <span class="version-info" *ngIf="!collapse"> <b>Version:</b> {{ appVersion }} </span>
+    @if (!collapse()) {
+      <span class="version-info"> <b>Version:</b> {{ appVersion }} </span>
+    }
 
-    <button mat-icon-button (click)="collapse = !collapse">
-      <mat-icon mat-icon color="white">{{ toggleIcon }}</mat-icon>
+    <button mat-icon-button (click)="collapse.set(!collapse())">
+      <mat-icon color="white">{{ toggleIcon }}</mat-icon>
     </button>
   </div>
 </mat-list>

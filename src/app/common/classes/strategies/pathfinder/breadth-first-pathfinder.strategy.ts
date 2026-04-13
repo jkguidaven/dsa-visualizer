@@ -7,7 +7,7 @@ export class BreadthFirstPathFinderStrategy implements PathFinderStrategy {
     queue.push(model.getStartingNode());
 
     while (queue.length) {
-      let currentNode = queue.shift();
+      let currentNode = queue.shift()!;
       currentNode.color = GraphModelColorIndicators.visited;
 
       if (currentNode === model.getEndingNode()) {

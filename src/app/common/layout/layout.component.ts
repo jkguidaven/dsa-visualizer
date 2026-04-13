@@ -1,16 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, input } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { PageSidenavComponent } from './page-sidenav/page-sidenav.component';
 
 @Component({
   selector: 'app-layout',
+  imports: [
+    MatSidenavModule,
+    MatToolbarModule,
+    MatDividerModule,
+    PageHeaderComponent,
+    PageSidenavComponent,
+  ],
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
-  collapseSidenav: boolean;
-  @Input() menuItems: any[];
+  menuItems = input<any[]>([]);
+  collapseSidenav = false;
 
-  constructor(private router: Router) { }
+  private router = inject(Router);
 
   get pageTitle() {
     return this.currentMenuItem.label;
@@ -21,7 +33,10 @@ export class LayoutComponent {
   }
 
   private get currentMenuItem() {
-    const selected = this.menuItems.find((item) => this.router.url.startsWith(`/${item.link}`));
-    return selected || this.menuItems[0];
+    const items = this.menuItems();
+    const selected = items.find((item) =>
+      this.router.url.startsWith(`/${item.link}`)
+    );
+    return selected || items[0];
   }
 }
